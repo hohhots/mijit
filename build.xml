@@ -1,6 +1,5 @@
 <project name="mijit">
 
-
 	<target name="init" depends="gitInit" />
 	
 	<target name="gitInit">
