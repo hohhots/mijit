@@ -1,0 +1,68 @@
+<project name="mijit">
+
+
+	<target name="init" depends="gitInit" />
+	
+	<target name="gitInit">
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global user.name brgd" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global user.email hohhots@gmail.com" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global push.default matching" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global branch.autosetuprebase always" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global color.ui true" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global color.status auto" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global color.branch auto" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.co checkout" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.ci commit" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.st status" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.xpush 'push origin master'" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.br branch" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.hist 'log --pretty=format:&quot;%h %ad | %s%d [%an]&quot; --graph --date=short'" />
+		</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.type 'cat-file -t'" />
+      	</exec>
+		<exec executable = "bash">
+        	<arg value = "-c" />
+        	<arg value = "git config --global alias.dump 'cat-file -p'" />
+      	</exec>
+	</target>
+</project>
