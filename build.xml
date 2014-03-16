@@ -46,7 +46,7 @@
 		<echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
 			
-	<target name="begindev" >
+	<target name="begindev" depends="enddev">
 		<echo>Start to develop!</echo>
 		<exec executable = "bash">
 			<arg value = "-c" />
