@@ -51,7 +51,7 @@
 		<exec executable = "bash">
 			<arg value = "-c" />
 			<arg value = "
-			    git xmerge;
+			    git xmerge &amp;
 				eclipse &amp;
 			    " />
 	    </exec>
