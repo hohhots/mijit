@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="mijit" default="init" basedir="." >
-
+	
 	<property name="gitConfig" value="git config --global" />
 	
 	<target name="init" depends="gitInit,gitDiff" />
