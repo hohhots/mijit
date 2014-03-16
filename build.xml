@@ -3,7 +3,7 @@
 
 	<property name="gitConfig" value="git config --global" />
 	
-	<target name="init" depends="gitInit" />
+	<target name="init" depends="gitInit,gitDiff" />
 	
 	<target name="gitInit">
 		<exec executable = "bash">
@@ -19,6 +19,9 @@
 		   		${gitConfig} alias.co checkout;
 		   		${gitConfig} alias.ci commit;
 		   		${gitConfig} alias.st status;
+		   		${gitConfig} alias.xfetch 'fetch origin master';
+		   		${gitConfig} alias.xdiff 'diff origin master';
+		   		${gitConfig} alias.xmerge 'merge origin master';
 		   		${gitConfig} alias.xpush 'push origin master';
 		   		${gitConfig} alias.br branch;
 		   		${gitConfig} alias.type 'cat-file -t';
@@ -26,5 +29,25 @@
 		   		${gitConfig} alias.hist 'log --pretty=format:\&quot;%h %ad | %s%d [%an]\&quot; --graph --date=short'
 		   		" />
 		</exec>
+	</target>
+	
+	<target name="gitDiff">
+		<exec executable = "bash">
+			<arg value = "-c" />
+			<arg value = "
+				git xfetch;
+				git xdiff;
+			    " />
+	    </exec>
+	</target>
+			
+	<target name="start">
+		<exec executable = "bash">
+			<arg value = "-c" />
+			<arg value = "
+			    git xmerge;
+				eclipse &amp;
+			    " />
+	    </exec>
 	</target>
 </project>
