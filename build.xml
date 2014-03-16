@@ -6,6 +6,7 @@
 	<target name="init" depends="gitInit,gitDiff" />
 	
 	<target name="gitInit">
+		<echo>Set git global environment variable &amp; alias ： </echo>
 		<exec executable = "bash">
 		   	<arg value = "-c" />
 		   	<arg value = "
@@ -19,7 +20,7 @@
 		   		${gitConfig} alias.co checkout;
 		   		${gitConfig} alias.ci commit;
 		   		${gitConfig} alias.st status;
-		   		${gitConfig} alias.xfetch 'fetch origin master';
+		   		${gitConfig} alias.xfetch 'fetch origin';
 		   		${gitConfig} alias.xdiff 'diff origin master';
 		   		${gitConfig} alias.xmerge 'merge origin master';
 		   		${gitConfig} alias.xpush 'push origin master';
@@ -29,19 +30,24 @@
 		   		${gitConfig} alias.hist 'log --pretty=format:\&quot;%h %ad | %s%d [%an]\&quot; --graph --date=short'
 		   		" />
 		</exec>
+		<echo>OK!</echo>
 	</target>
 	
 	<target name="gitDiff">
+		<echo>Check none fetched changes of remote repository.</echo>
+		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
 			<arg value = "-c" />
 			<arg value = "
-				git xfetch;
-				git xdiff;
+				git xfetch &amp;
+				git xdiff | grep -- '^[+-]'
 			    " />
 	    </exec>
+		<echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
 			
-	<target name="start">
+	<target name="begindev" >
+		<echo>Start to develop!</echo>
 		<exec executable = "bash">
 			<arg value = "-c" />
 			<arg value = "
@@ -49,5 +55,18 @@
 				eclipse &amp;
 			    " />
 	    </exec>
+		<echo>Started!</echo>
+	</target>
+	
+	<target name="enddev" depends="gitDiff">
+		<echo>Check local repository state.</echo>
+		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
+		<exec executable = "bash">
+	    	<arg value = "-c" />
+			<arg value = "
+			    git st | grep -i 'modified:'
+			    " />
+	    </exec>
+	    <echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
 </project>
