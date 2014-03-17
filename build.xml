@@ -6,7 +6,7 @@
 	<target name="init" depends="gitInit,gitDiff" />
 	
 	<target name="gitInit">
-		<echo>Set git global environment variable &amp; alias ： </echo>
+		<echo>Set git global environment variable &amp; alias.</echo>
 		<exec executable = "bash">
 		   	<arg value = "-c" />
 		   	<arg value = "
