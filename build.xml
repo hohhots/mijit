@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="mijit" default="init" basedir="." >
+<project name="mijit" default="begindev" basedir="." >
 	
 	<property name="gitConfig" value="git config --global" />
-	
-	<target name="init" depends="gitInit,gitDiff" />
 	
 	<target name="gitInit">
 		<echo>Set git global environment variable &amp; alias.</echo>
@@ -33,7 +31,7 @@
 		<echo>OK!</echo>
 	</target>
 	
-	<target name="gitDiff">
+	<target name="IfRemoteHasNew">
 		<echo>Check none fetched changes of remote repository.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
@@ -46,7 +44,7 @@
 		<echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
 			
-	<target name="begindev" depends="enddev">
+	<target name="begindev" depends="gitInit,enddev">
 		<echo>Start to develop!</echo>
 		<exec executable = "bash">
 			<arg value = "-c" />
@@ -58,7 +56,7 @@
 		<echo>Started!</echo>
 	</target>
 	
-	<target name="enddev" depends="gitDiff">
+	<target name="enddev" depends="IfRemoteHasNew">
 		<echo>Check local repository state.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
