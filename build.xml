@@ -30,29 +30,55 @@
 		</exec>
 		<echo>OK!</echo>
 	</target>
+
+	<target name="waitFor10Sec">
+		<sleep seconds="10" />
+	</target>
 	
-	<target name="IfRemoteHasNew">
+	<target name="gitFetch">
+			<exec executable = "bash">
+				<arg value = "-c" />
+				<arg value = "git xfetch &amp;" />
+		    </exec>
+			<antcall target="waitFor10Sec" /> 
+	</target>
+	
+	<target name="IfRemoteHasNew" depends="gitFetch">
 		<echo>Check none fetched changes of remote repository.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
 			<arg value = "-c" />
-			<arg value = "
-				git xfetch &amp;
-				git xdiff | grep -- '^[+-]'
-			    " />
+			<arg value = "git xdiff | grep -- '^[+-]'" />
 	    </exec>
 		<echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
+	</target>
+	
+	<target name="startEclipse" >
+		<exec executable = "bash">
+			<arg value = "-c" />
+			<arg value = "eclipse &amp;" />
+		</exec>
 	</target>
 			
 	<target name="begindev" depends="gitInit,enddev">
 		<echo>Start to develop!</echo>
+		<input
+		    message="Do you want to start to develop(y/n)?"
+		    validargs="y,n"
+		    addproperty="do.delete"
+		/>
+		
+		<condition property="do.abort">
+		    <equals arg1="n" arg2="${do.delete}"/>
+		</condition>
+		<fail if="do.abort">Stopped by user.</fail>
+		
 		<exec executable = "bash">
 			<arg value = "-c" />
-			<arg value = "
-			    git xmerge &amp;
-				eclipse &amp;
-			    " />
+			<arg value = "git xmerge &amp;" />
 	    </exec>
+		<antcall target="waitFor10Sec" /> 
+		<antcall target="startEclipse" /> 
 		<echo>Started!</echo>
 	</target>
 	
