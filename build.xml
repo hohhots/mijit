@@ -27,7 +27,7 @@
 		   		${gitConfig} alias.br branch;
 		   		${gitConfig} alias.type 'cat-file -t';
 		   		${gitConfig} alias.dump 'cat-file -p';
-		   		${gitConfig} alias.hist 'log --pretty=format:\&quot;%h %ad | %s%d [%an]\&quot; --graph --date=short'
+		   		${gitConfig} alias.hist 'log --pretty=format:&quot;%h %ad | %s%d [%an]&quot; --graph --date=short'
 		   		" />
 		</exec>
 		<echo>OK!</echo>
