@@ -21,6 +21,7 @@
 		   		${gitConfig} alias.xfetch 'fetch origin';
 		   		${gitConfig} alias.xdiff 'diff origin master';
 		   		${gitConfig} alias.xmerge 'merge origin master';
+		   		${gitConfig} alias.xpull 'pull origin master';
 		   		${gitConfig} alias.xpush 'push origin master';
 		   		${gitConfig} alias.br branch;
 		   		${gitConfig} alias.type 'cat-file -t';
@@ -75,7 +76,7 @@
 		
 		<exec executable = "bash">
 			<arg value = "-c" />
-			<arg value = "git xmerge &amp;" />
+			<arg value = "git xpull" />
 	    </exec>
 		<antcall target="waitFor10Sec" /> 
 		<antcall target="startEclipse" /> 
