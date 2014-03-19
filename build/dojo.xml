@@ -14,22 +14,22 @@
 		
 		<exec executable = "bash" dir="../${dojoDir}/dojo">
 			<arg value = "-c" />
-			<arg value = "git xpull &amp;" />
+			<arg value = "git xpull" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/dojox">
 			<arg value = "-c" />
-			<arg value = "git xpull &amp;" />
+			<arg value = "git xpull" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/dijit">
 				<arg value = "-c" />
-				<arg value = "git xpull &amp;" />
+				<arg value = "git xpull" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/util">
 			<arg value = "-c" />
-			<arg value = "git xpull &amp;" />
+			<arg value = "git xpull" />
 		</exec>
 		
 		<echo>Done!</echo>
@@ -46,6 +46,8 @@
 				git clone https://github.com/dojo/dojox.git;
 				git clone https://github.com/dojo/dijit.git;
 				git clone https://github.com/dojo/util.git;
+				git clone https://github.com/dojo/docs.git;
+				git clone https://github.com/dojo/demos.git;
 				" />
 		</exec>
 		
