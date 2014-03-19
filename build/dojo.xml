@@ -32,6 +32,16 @@
 			<arg value = "git xpull" />
 		</exec>
 		
+		<exec executable = "bash" dir="../${dojoDir}/docs">
+			<arg value = "-c" />
+			<arg value = "git xpull" />
+		</exec>
+
+		<exec executable = "bash" dir="../${dojoDir}/demos">
+			<arg value = "-c" />
+			<arg value = "git xpull" />
+		</exec>
+
 		<echo>Done!</echo>
 	</target>
 	
