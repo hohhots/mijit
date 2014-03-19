@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="mijit" default="begindev" basedir="." >
+<project name="mijit" default="begindev" basedir=".." >
 	
-	<property name="gitConfig" value="git config --global" />
+    <!--  all properties are in build.properties -->
+    <property file="build/build.properties" />
 	
 	<target name="gitInit">
 		<echo>Set git global environment variable &amp; alias.</echo>
