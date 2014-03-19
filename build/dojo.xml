@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	
+	<!-- all properties are in build.properties -->
+	<property file="build/build.properties" />
+	
+	<target name="initDojo" depends="dojodir.check">
+        <antcall target="pullDojo" />
+        <antcall target="cloneDojo" />
+	</target>
+	
+	<target name="pullDojo" if="${dojodir.exists}">
+		<echo>Pull dojo from github</echo>
+		
+		<exec executable = "bash" dir="../${dojoDir}/dojo">
+			<arg value = "-c" />
+			<arg value = "git xpull &amp;" />
+		</exec>
+		
+		<exec executable = "bash" dir="../${dojoDir}/dojox">
+			<arg value = "-c" />
+			<arg value = "git xpull &amp;" />
+		</exec>
+		
+		<exec executable = "bash" dir="../${dojoDir}/dijit">
+				<arg value = "-c" />
+				<arg value = "git xpull &amp;" />
+		</exec>
+		
+		<exec executable = "bash" dir="../${dojoDir}/util">
+			<arg value = "-c" />
+			<arg value = "git xpull &amp;" />
+		</exec>
+		
+		<echo>Done!</echo>
+	</target>
+	
+	<target name="cloneDojo" unless="${dojodir.exists}">
+		<echo>Clone dojo from github</echo>
+		
+		<mkdir dir="../${dojoDir}" />
+		<exec executable = "bash" dir="../${dojoDir}">
+			<arg value = "-c" />
+			<arg value = "
+				git clone https://github.com/dojo/dojo.git;
+				git clone https://github.com/dojo/dojox.git;
+				git clone https://github.com/dojo/dijit.git;
+				git clone https://github.com/dojo/util.git;
+				" />
+		</exec>
+		
+		<echo>Done!</echo>
+	</target>
+		        	
+	<target name="dojodir.check">
+	    <condition property="dojodir.exists">
+	    	<available file="../${dojoDir}" type="dir"/>
+	    </condition>
+	</target>
+</project>

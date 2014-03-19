@@ -4,6 +4,9 @@
     <!--  all properties are in build.properties -->
     <property file="build/build.properties" />
 	
+	<!--  all other build files. -->
+	<import file="${dojoBuild}"/>
+	
 	<target name="gitInit">
 		<echo>Set git global environment variable &amp; alias.</echo>
 		<exec executable = "bash">
@@ -67,6 +70,7 @@
 			
 	<target name="begindev">
 		<antcall target="gitInit" />
+		<antcall target="initDojo" />
 		<antcall target="enddev" />
 		
 		<echo>Start to develop!</echo>
