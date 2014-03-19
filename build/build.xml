@@ -33,19 +33,15 @@
 		<echo>OK!</echo>
 	</target>
 
-	<target name="waitFor10Sec">
-		<sleep seconds="10" />
-	</target>
-	
 	<target name="gitFetch">
 			<exec executable = "bash">
 				<arg value = "-c" />
 				<arg value = "git xfetch &amp;" />
 		    </exec>
-			<antcall target="waitFor10Sec" /> 
 	</target>
 	
-	<target name="IfRemoteHasNew" depends="gitFetch">
+	<target name="IfRemoteHasNew">
+		<antcall target="gitFetch" /> 
 		<echo>Check none fetched changes of remote repository.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
@@ -61,8 +57,18 @@
 			<arg value = "eclipse &amp;" />
 		</exec>
 	</target>
+	
+	<target name="gitPull" >
+		<exec executable = "bash">
+			<arg value = "-c" />
+			<arg value = "git xpull" />
+	    </exec>
+	</target>
 			
-	<target name="begindev" depends="gitInit,enddev">
+	<target name="begindev">
+		<antcall target="gitInit" />
+		<antcall target="enddev" />
+		
 		<echo>Start to develop!</echo>
 		<input
 		    message="Do you want to start to develop(y/n)?"
@@ -75,16 +81,13 @@
 		</condition>
 		<fail if="do.abort">Stopped by user.</fail>
 		
-		<exec executable = "bash">
-			<arg value = "-c" />
-			<arg value = "git xpull" />
-	    </exec>
-		<antcall target="waitFor10Sec" /> 
+		<antcall target="gitPull" /> 
 		<antcall target="startEclipse" /> 
 		<echo>Started!</echo>
 	</target>
 	
-	<target name="enddev" depends="IfRemoteHasNew">
+	<target name="enddev" >
+		<antcall target="IfRemoteHasNew" />
 		<echo>Check local repository state.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
