@@ -4,48 +4,55 @@
 	<!-- all properties are in build.properties -->
 	<property file="build/build.properties" />
 	
-	<target name="initDojo" depends="dojodir.check">
-        <antcall target="pullDojo" />
-        <antcall target="cloneDojo" />
+	<target name="initDojo">
+		<if>
+			<available file="../${dojoDir}" type="dir"/>
+			<then>
+				<antcall target="pullDojo" />
+			</then>
+			<else>
+				<antcall target="cloneDojo" />
+			</else>
+		</if>        
 	</target>
 	
-	<target name="pullDojo" if="${dojodir.exists}">
+	<target name="pullDojo">
 		<echo>Pull dojo from github</echo>
 		
 		<exec executable = "bash" dir="../${dojoDir}/dojo">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/dojox">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/dijit">
 				<arg value = "-c" />
-				<arg value = "git xpull" />
+				<arg value = "${gitXpull}" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/util">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 		</exec>
 		
 		<exec executable = "bash" dir="../${dojoDir}/docs">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 		</exec>
 
 		<exec executable = "bash" dir="../${dojoDir}/demos">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 		</exec>
 
 		<echo>Done!</echo>
 	</target>
 	
-	<target name="cloneDojo" unless="${dojodir.exists}">
+	<target name="cloneDojo">
 		<echo>Clone dojo from github</echo>
 		
 		<mkdir dir="../${dojoDir}" />

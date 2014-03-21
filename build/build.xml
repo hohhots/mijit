@@ -4,6 +4,13 @@
     <!--  all properties are in build.properties -->
     <property file="build/build.properties" />
 	
+	<!-- additional ant tasks' CLASSPATH defination for all build files -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="build/ants/ant-contrib/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+	
 	<!--  all other build files. -->
 	<import file="${dojoBuild}"/>
 	
@@ -61,10 +68,10 @@
 		</exec>
 	</target>
 	
-	<target name="gitPull" >
+	<target name="pullMijit" >
 		<exec executable = "bash">
 			<arg value = "-c" />
-			<arg value = "git xpull" />
+			<arg value = "${gitXpull}" />
 	    </exec>
 	</target>
 			
@@ -85,7 +92,7 @@
 		</condition>
 		<fail if="do.abort">Stopped by user.</fail>
 		
-		<antcall target="gitPull" /> 
+		<antcall target="pullMijit" /> 
 		<antcall target="startEclipse" /> 
 		<echo>Started!</echo>
 	</target>
@@ -96,7 +103,7 @@
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
 	    	<arg value = "-c" />
-			<arg value = "git st | grep -i 'modified:'" />
+			<arg value = "git st" />
 	    </exec>
 	    <echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
