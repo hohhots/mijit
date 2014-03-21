@@ -83,7 +83,7 @@
 		<echo>Started!</echo>
 	</target>
 	
-	<target name="enddev" >
+	<target name="end" >
 		<antcall target="IfRemoteHasNew" />
 		<echo>Check local repository state.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
