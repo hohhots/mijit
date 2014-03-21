@@ -64,7 +64,7 @@
 	<target name="begindev">
 		<antcall target="gitInit" />
 		<antcall target="initDojo" />
-		<antcall target="enddev" />
+		<antcall target="end" />
 		
 		<echo>Start to develop!</echo>
 		<input
