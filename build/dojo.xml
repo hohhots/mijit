@@ -19,35 +19,14 @@
 	<target name="pullDojo">
 		<echo>Pull dojo from github</echo>
 		
-		<exec executable = "bash" dir="../${dojoDir}/dojo">
-			<arg value = "-c" />
-			<arg value = "${gitXpull}" />
-		</exec>
-		
-		<exec executable = "bash" dir="../${dojoDir}/dojox">
-			<arg value = "-c" />
-			<arg value = "${gitXpull}" />
-		</exec>
-		
-		<exec executable = "bash" dir="../${dojoDir}/dijit">
-				<arg value = "-c" />
-				<arg value = "${gitXpull}" />
-		</exec>
-		
-		<exec executable = "bash" dir="../${dojoDir}/util">
-			<arg value = "-c" />
-			<arg value = "${gitXpull}" />
-		</exec>
-		
-		<exec executable = "bash" dir="../${dojoDir}/docs">
-			<arg value = "-c" />
-			<arg value = "${gitXpull}" />
-		</exec>
-
-		<exec executable = "bash" dir="../${dojoDir}/demos">
-			<arg value = "-c" />
-			<arg value = "${gitXpull}" />
-		</exec>
+		<for list="${dojoSubDirs}" param="dir">
+			<sequential>
+				<exec executable = "bash" dir="../${dojoDir}/@{dir}">
+					<arg value = "-c" />
+					<arg value = "${gitXpull}" />
+				</exec>
+			</sequential>
+		</for>
 
 		<echo>Done!</echo>
 	</target>
@@ -56,17 +35,15 @@
 		<echo>Clone dojo from github</echo>
 		
 		<mkdir dir="../${dojoDir}" />
-		<exec executable = "bash" dir="../${dojoDir}">
-			<arg value = "-c" />
-			<arg value = "
-				git clone https://github.com/dojo/dojo.git;
-				git clone https://github.com/dojo/dojox.git;
-				git clone https://github.com/dojo/dijit.git;
-				git clone https://github.com/dojo/util.git;
-				git clone https://github.com/dojo/docs.git;
-				git clone https://github.com/dojo/demos.git;
-				" />
-		</exec>
+		
+		<for list="${dojoSubDirs}" param="dir">
+			<sequential>
+				<exec executable = "bash" dir="../${dojoDir}">
+					<arg value = "-c" />
+					<arg value = "git clone https://github.com/dojo/@{dir}.git;" />
+				</exec>
+			</sequential>
+		</for>
 		
 		<echo>Done!</echo>
 	</target>

@@ -16,30 +16,16 @@
 	
 	<target name="gitInit">
 		<echo>Set git global environment variable &amp; alias.</echo>
-		<exec executable = "bash">
-		   	<arg value = "-c" />
-		   	<arg value = "
-		   		${gitConfig} user.name  brgd;
-		   		${gitConfig} user.email hohhots@gmail.com;
-		   		${gitConfig} push.default matching;
-		   		${gitConfig} branch.autosetuprebase always;
-		   		${gitConfig} color.ui true;
-		   		${gitConfig} color.status auto;
-		   		${gitConfig} color.branch auto;
-		   		${gitConfig} alias.co checkout;
-		   		${gitConfig} alias.ci commit;
-		   		${gitConfig} alias.st status;
-		   		${gitConfig} alias.xfetch 'fetch origin';
-		   		${gitConfig} alias.xdiff 'diff origin master';
-		   		${gitConfig} alias.xmerge 'merge origin master';
-		   		${gitConfig} alias.xpull 'pull origin master';
-		   		${gitConfig} alias.xpush 'push origin master';
-		   		${gitConfig} alias.br branch;
-		   		${gitConfig} alias.type 'cat-file -t';
-		   		${gitConfig} alias.dump 'cat-file -p';
-		   		${gitConfig} alias.hist 'log --pretty=format:\&quot;%h %ad | %s%d [%an]\&quot; --graph --date=short'
-		   		" />
-		</exec>
+		
+		<for list="${gitAlias}" param="alias">
+			<sequential>
+				<exec executable = "bash">
+					<arg value = "-c" />
+					<arg value = "${gitConfig} @{alias}" />
+				</exec>
+			</sequential>
+		</for>
+		
 		<echo>OK!</echo>
 	</target>
 
