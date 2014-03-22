@@ -6,7 +6,7 @@
 	
 	<target name="initDojo">
 		<if>
-			<available file="../${dojoDir}" type="dir"/>
+			<available file="../${dojoGitDir}" type="dir"/>
 			<then>
 				<antcall target="pullDojo" />
 			</then>
@@ -21,7 +21,7 @@
 		
 		<for list="${dojoSubDirs}" param="dir">
 			<sequential>
-				<exec executable = "bash" dir="../${dojoDir}/@{dir}">
+				<exec executable = "bash" dir="../${dojoGitDir}/@{dir}">
 					<arg value = "-c" />
 					<arg value = "${gitXpull}" />
 				</exec>
@@ -34,11 +34,11 @@
 	<target name="cloneDojo">
 		<echo>Clone dojo from github</echo>
 		
-		<mkdir dir="../${dojoDir}" />
+		<mkdir dir="../${dojoGitDir}" />
 		
 		<for list="${dojoSubDirs}" param="dir">
 			<sequential>
-				<exec executable = "bash" dir="../${dojoDir}">
+				<exec executable = "bash" dir="../${dojoGitDir}">
 					<arg value = "-c" />
 					<arg value = "git clone https://github.com/dojo/@{dir}.git;" />
 				</exec>
@@ -46,11 +46,5 @@
 		</for>
 		
 		<echo>Done!</echo>
-	</target>
-		        	
-	<target name="dojodir.check">
-	    <condition property="dojodir.exists">
-	    	<available file="../${dojoDir}" type="dir"/>
-	    </condition>
 	</target>
 </project>
