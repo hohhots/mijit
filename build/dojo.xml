@@ -13,7 +13,9 @@
 			<else>
 				<antcall target="cloneDojo" />
 			</else>
-		</if>        
+		</if>
+		
+		<antcall target="coDojoForDev" />
 	</target>
 	
 	<target name="pullDojo">
@@ -45,6 +47,21 @@
 			</sequential>
 		</for>
 		
+		<echo>Done!</echo>
+	</target>
+	
+	<target name="coDojoForDev">
+		<echo>Check out dojo's latest release from local repository!</echo>
+		
+		<for list="${dojoSubDirsForDev}" param="dir">
+			<sequential>
+				<delete dir="../@{dir}"/>
+				<copy todir="../@{dir}">
+					<fileset dir="../${dojoGitDir}/@{dir}"/>
+				</copy>
+			</sequential>
+		</for>
+
 		<echo>Done!</echo>
 	</target>
 </project>
