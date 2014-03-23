@@ -62,7 +62,7 @@
 				
 				<exec executable = "bash" dir="../@{dir}">
 					<arg value = "-c" />
-					<arg value = "git co `git tag | sort | tail -1`" />
+					<arg value = "git co `git tag | sort | tail -1` | grep '^HEAD$'" />
 				</exec>
 			</sequential>
 		</for>
