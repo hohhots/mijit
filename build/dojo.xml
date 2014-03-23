@@ -51,14 +51,19 @@
 	</target>
 	
 	<target name="coDojoForDev">
-		<echo>Check out dojo's latest release from local repository!</echo>
+		<echo>Check out dojo's latest tag from local repository!</echo>
 		
 		<for list="${dojoSubDirsForDev}" param="dir">
 			<sequential>
 				<delete dir="../@{dir}"/>
 				<copy todir="../@{dir}">
-					<fileset dir="../${dojoGitDir}/@{dir}"/>
+					<fileset dir="../${dojoGitDir}/@{dir}" defaultexcludes="no"/>
 				</copy>
+				
+				<exec executable = "bash" dir="../@{dir}">
+					<arg value = "-c" />
+					<arg value = "git co `git tag | sort | tail -1`" />
+				</exec>
 			</sequential>
 		</for>
 
