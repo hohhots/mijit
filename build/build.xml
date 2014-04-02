@@ -64,7 +64,7 @@
 	<target name="begindev">
 		<antcall target="gitInit" />
 		<antcall target="initDojo" />
-		<antcall target="end" />
+		<antcall target="pullMijit" />
 		
 		<echo>Start to develop!</echo>
 		<input
@@ -77,8 +77,7 @@
 		    <equals arg1="n" arg2="${do.delete}"/>
 		</condition>
 		<fail if="do.abort">Stopped by user.</fail>
-		
-		<antcall target="pullMijit" /> 
+		 
 		<antcall target="startEclipse" /> 
 		<echo>Started!</echo>
 	</target>
