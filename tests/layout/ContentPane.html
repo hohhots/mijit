@@ -64,7 +64,7 @@
 			
 			var pane2, MyWidget;
 			
-			doh.registerGroup("pane2", [
+			doh.register("pane2", [
 				{
 					name: "clear_content",
 					setUp: function(t){
@@ -85,17 +85,17 @@
 	</script>
 </head>
 <body class="claro" role="main">
-	<h2>mijit/layout/mContentPane DOH test</h2>
+	<h2>mijit/layout/ContentPane DOH test</h2>
 	<h3>Test designed to run on localhost (minimize impact from network latency)</h3>
 
 	<h4>This should NOT be parsed automatically</h4> 
-	<div id="pane1" data-dojo-type="mijit/layout/mContentPane" data-dojo-props='"class":"box"'>
+	<div id="pane1" data-dojo-type="mijit/layout/ContentPane" data-dojo-props='"class":"box"'>
 		<div data-dojo-type='TestWidget'>If this has a different background and a red border, the page parsed when it shouldn't</div>
 	</div>
-	<br/><h3>Testing mContentPane</h3>
+	<br/><h3>Testing ContentPane</h3>
 	<div id='pane2' class='box'>
 		Even though the entire page isn't scanned for widgets,
-		any sub widgets of a mContentPane will be created when a mContentPane is created<br/>
+		any sub widgets of a ContentPane will be created when a ContentPane is created<br/>
 		<span id="2_zero" data-dojo-type='TestWidget'>This should have a backgroundcolor and a border</span>
 		<div id="2_one" data-dojo-type="dijit/_WidgetBase"></div>
 		<div id="2_two" data-dojo-type="dijit/_WidgetBase"></div>
@@ -115,7 +115,7 @@
 
 	<!-- for testing popup widgets inside of a content pane -->
 	<div id="popupTest">
-		<div id="popupPane" data-dojo-type="dijit/layout/ContentPane">
+		<div id="popupPane" data-dojo-type="mijit/layout/ContentPane">
 			<div id="dialog" data-dojo-type="dijit/Dialog">
 				hello world
 			</div>
@@ -124,7 +124,7 @@
 
 	<!-- for testing non-widgets inside of a content pane -->
 	<div id="nonWidgetTest">
-		<div id="nonWidgetPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-id="nwp">
+		<div id="nonWidgetPane" data-dojo-type="mijit/layout/ContentPane" data-dojo-id="nwp">
 			<div data-dojo-type="NonWidget" data-dojo-id="nw1"></div>
 		</div>
 	</div>

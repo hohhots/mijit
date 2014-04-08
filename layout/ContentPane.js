@@ -6,7 +6,7 @@ define([
 	// module:
 	//		mijit/layout/ContentPane
 
-	return declare("mijit.layout.mContentPane", ContentPane, {
+	return declare("mijit.layout.ContentPane", ContentPane, {
 		
 	});
 });
