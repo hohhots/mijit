@@ -1,7 +1,7 @@
 define([
-    "dojo/_base/declare", // declare
-	"../../dijit/layout/ContentPane",
-], function(declare, ContentPane){
+    "../../dijit/layout/ContentPane",
+    "dojo/_base/declare" // declare
+], function( ContentPane, declare){
 
 	// module:
 	//		mijit/layout/ContentPane
