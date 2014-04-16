@@ -77,6 +77,32 @@
 			        	doh.is(0, _WidgetBase.prototype.getChildren.call(pane2).length);
 			        	doh.is("", pane2.domNode.innerHTML)
 			        }
+				},
+				{
+					name: "setContent_String",
+					setUp: function(){
+						pane2.set("content", "");
+					},
+					runTest: function(t){
+						var msg = "<h3>a simple html string</h3>";
+						pane2.set("content", msg);
+						doh.is(msg, pane2.domNode.innerHTML.toLowerCase());
+					}
+				},
+				{
+					name: "setContent_DOMNode",
+					setUp: function(t){
+						var div = document.createElement('div');
+						div.innerHTML = "set('content', [DOMNode] )";
+						div.setAttribute('data-dojo-type', 'TestWidget');
+						pane2.set("content", div);
+					},
+					runTest: function(t){
+						doh.is(1, _WidgetBase.prototype.getChildren.call(pane2).length);
+					},
+					tearDown: function(t){
+						pane2.set("content", ""); // clear content for next tests
+					}
 				}
 			]);
 			
