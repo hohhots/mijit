@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>javaScript DOH test</title>
+
+	<script type="text/javascript" src="../../../dojo/dojo.js"
+		data-dojo-config="isDebug: true"></script>
+	<script type="text/javascript">
+		require([
+			"doh/runner"
+		], function(doh){
+			doh.register("Object", [
+			    {
+			        name: "Charactor",
+			        runTest: function(t){
+			        	doh.is("function",    typeof Object.__proto__);
+			        	doh.is(Function,             Object.__proto__);
+			        	
+			        	doh.is("object",      typeof Object.prototype);
+			        }
+			                  			         
+			    }
+			]);		
+			
+			doh.register("Function", [
+			    {
+			        name: "Charactor",
+   	                runTest: function(t){
+   	                	doh.is(Object.prototype, Function.__proto__);
+   	                }
+			         
+   	            }
+			]);			
+
+			doh.register("function object", [
+			    {
+			        name: "Charactor",
+			       	runTest: function(t){
+			       		var f  = function(){};
+			       		
+			       		doh.is(Object.prototype,          Function.__proto__);
+			       		
+			       	   	doh.is(Function.prototype,        f.__proto__);
+			       	 	doh.is("function"        , typeof f.__proto__);
+			       	 	
+			       	    doh.is("object",           typeof f.prototype);
+			       	 	doh.is(f,                         f.prototype.constructor);
+			       	 	
+			       	 	
+			       	}
+				}
+			]);
+			
+			doh.run();
+		});
+	</script>
+</head>
+<body class="claro" role="main">
+	<h2>Tests for javaScript charactors</h2>
+</body>
+</html>
