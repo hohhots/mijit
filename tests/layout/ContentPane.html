@@ -111,32 +111,49 @@
 					name: "prototype",
 					setUp: function(t){
 			    		pane2 = function(a,b){return a * b;};
-			    		pane22 = {a:2};
-			    		pane23 = new pane2();
+			    		pane22 = new pane2();
+			    		pane23 = {a:2};
+			    		
 					},
 			       	runTest: function(t){
-			       		doh.is(Function, pane2.constructor);
-			       		doh.is(Function, pane2.constructor.prototype.constructor.prototype.constructor.prototype.constructor);
-			       		doh.is("object", typeof pane2.prototype);
-			       		doh.is(Object.prototype, pane2.prototype);
-			       		doh.is("function",typeof pane2.__proto__);
-			       		doh.is(Function.prototype, pane2.__proto__);
+       		
+			       		doh.is(Function.prototype,   pane2.__proto__);
+			       		doh.is("function",    typeof pane2.__proto__ );
+			       		doh.is(Object.prototype,     pane2.__proto__.__proto__);
+			       		doh.is(null,                 pane2.__proto__.__proto__.__proto__);
+			       		doh.is(Function,             pane2.__proto__.constructor);
 			       		
-			       		doh.is(Object, pane22.constructor);
-			       		doh.is(Object, pane22.constructor.prototype.constructor.prototype.constructor.prototype.constructor);
-			       		//doh.is("object", typeof pane22.prototype);  //error
-			       		doh.is("object", typeof pane22.__proto__);
-			       		doh.is(Object.prototype, pane22.__proto__);
+			       		doh.is(Object.prototype,     pane2.prototype);			       		
+			       		doh.is("object",      typeof pane2.prototype);
+			       		doh.is(pane2,                pane2.prototype.constructor);
 			       		
-			       		doh.is(pane2, pane23.constructor);
-			       		doh.is(pane2, pane23.constructor.prototype.constructor.prototype.constructor.prototype.constructor);
-			       		doh.is(pane2.prototype, pane23.__proto__);
-			       		//alert(pane23.call());   //error
+			       		////-------------------------------------------------------------------		
 			       		
-
-			       		doh.is(2, pane2.length);
+			       		doh.is(pane2.prototype,      pane22.__proto__);
+			       		doh.is(pane2,                pane22.__proto__.constructor);
+			       		
+			       		doh.is(null,                 pane22.prototyep);
+			       		
+			       		////-------------------------------------------------------------------			 
+			       		
+			       		doh.is(Object.prototype,     pane23.__proto__);
+			       		doh.is("object",      typeof pane23.__proto__);
+			       		doh.is(Object,               pane23.__proto__.constructor);
+			       			       		
+			       		doh.is(null,                 pane23.prototype);
+	       		
 			       	}
 			    }
+			]);
+			
+			
+			doh.register("javascript", [
+			     {
+			        	name:"prototype",
+			        	runTest: function(t){
+			        		
+			        	}
+			     }
 			]);
 			
 			doh.run();
