@@ -14,12 +14,24 @@
 			    {
 			        name: "Charactor",
 			        runTest: function(t){
-			        	doh.is("function",    typeof Object.__proto__);
-			        	doh.is(Function,             Object.__proto__);
+			        	doh.is(typeof Object,         "function");
 			        	
-			        	doh.is("object",      typeof Object.prototype);
+			        	doh.is(Object.__proto__,             Function.prototype);
+			        	doh.is(Object.__proto__.__proto__,   Object.prototype);
+			        	doh.is(Object.__proto__.prototype,   null);
+			        	doh.is(Object.__proto__.constructor, Function);
+			        	
+			        	doh.is(typeof Object.prototype,             "object");
+			        	doh.is(       Object.prototype.__proto__,   null); //null & undefined
+			        	doh.is(       Object.prototype.prototype,   null);
+			        	doh.is(       Object.prototype.constructor, Object);
+			        	
+			        	doh.is(Object.constructor,  Function);
+			        	doh.f(Object.hasOwnProperty(constructor));
+			        	doh.f(Object.__proto__.hasOwnProperty(constructor));
+			        	doh.f(Object.prototype.hasOwnProperty(constructor));
+
 			        }
-			                  			         
 			    }
 			]);		
 			
@@ -27,25 +39,25 @@
 			    {
 			        name: "Charactor",
    	                runTest: function(t){
-   	                	doh.is(Object.prototype, Function.__proto__);
+   	                	doh.is(typeof Function,       "function");
    	                }
 			         
    	            }
 			]);			
 
-			doh.register("function object", [
+			doh.register("function", [
 			    {
 			        name: "Charactor",
 			       	runTest: function(t){
 			       		var f  = function(){};
 			       		
-			       		doh.is(Object.prototype,          Function.__proto__);
+			       		doh.is(typeof f,          "function");
 			       		
-			       	   	doh.is(Function.prototype,        f.__proto__);
-			       	 	doh.is("function"        , typeof f.__proto__);
+			       	   	//doh.is(Function.prototype,        f.__proto__);
+			       	 	//doh.is("function"        , typeof f.__proto__);
 			       	 	
-			       	    doh.is("object",           typeof f.prototype);
-			       	 	doh.is(f,                         f.prototype.constructor);
+			       	    //doh.is("object",           typeof f.prototype);
+			       	 	//doh.is(f,                         f.prototype.constructor);
 			       	 	
 			       	 	
 			       	}
