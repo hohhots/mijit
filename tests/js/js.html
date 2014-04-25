@@ -26,10 +26,7 @@
 			        	doh.t(        Object.prototype.hasOwnProperty("constructor"));
 			        	doh.is(       Object.prototype.constructor, Object);
 			        	
-			        	doh.is(Object.constructor,  Function);
-			        	
-			        	doh.f(Object.hasOwnProperty(constructor));
-
+			        	doh.f(Object.hasOwnProperty("constructor"));
 			        }
 			    }
 			]);		
@@ -43,6 +40,11 @@
    	                	doh.t(Function instanceof Object);
    	                	
    	                	doh.is(typeof Function.__proto__, "function");
+   	                	doh.is(       Function.__proto__, Object.__proto__);
+   	                	
+   	                	doh.t(Function.hasOwnProperty("prototype"));
+   	                	doh.is(typeof Function.prototype, "function");
+   	                	//doh.is(Function.prototype, Object);
    	                }
 			         
    	            }
