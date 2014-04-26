@@ -16,9 +16,11 @@
 			        runTest: function(t){
 			        	doh.is(typeof Object,         "function");
 			        	
+			        	doh.t(Object instanceof Object);
+			        	doh.t(Object instanceof Function);
+			        	
 			        	doh.is(typeof Object.__proto__, "function");
 			        	doh.is(       Object.__proto__, Function.prototype);
-			        	doh.t(        Object.__proto__.hasOwnProperty("constructor"));
 			        	
 			        	doh.is(typeof Object.prototype,             "object");
 			        	doh.is(       Object.prototype.__proto__,   null); //null & undefined
@@ -37,14 +39,22 @@
    	                runTest: function(t){
    	                	doh.is(typeof Function,       "function");
    	                	
+   	                	doh.t(Function instanceof Function);
    	                	doh.t(Function instanceof Object);
    	                	
    	                	doh.is(typeof Function.__proto__, "function");
-   	                	doh.is(       Function.__proto__, Object.__proto__);
-   	                	
+   	                	doh.is(       Function.__proto__, Function.prototype);
+   	                	   	                	
    	                	doh.t(Function.hasOwnProperty("prototype"));
-   	                	doh.is(typeof Function.prototype, "function");
-   	                	//doh.is(Function.prototype, Object);
+   	                	doh.is(typeof Function.prototype,           "function");
+   	                	doh.is(typeof Function.prototype.__proto__, "object");
+   	                	doh.is(       Function.prototype.__proto__, Object.prototype);
+   	                	doh.f(        Function.prototype.hasOwnProperty("prototype"));
+			       	    doh.t(        Function.prototype.hasOwnProperty("constructor"));
+			       		doh.is(       Function.prototype.constructor, Function);
+
+   	                	doh.f(Function.hasOwnProperty("constructor"));
+   	                	
    	                }
 			         
    	            }
@@ -60,18 +70,16 @@
 			       		
 			       		doh.t(f instanceof Object);
 			       		doh.t(f instanceof Function);
+			       		doh.f(f instanceof f);
 			       		
-			       		doh.is(typeof f.__proto__,             "function");
-			       	    doh.t(        f.__proto__.hasOwnProperty("constructor"));
-			       		doh.is(       f.__proto__.constructor, Function);
+			       		doh.is(typeof f.__proto__,  "function");
+			       		doh.is(       f.__proto__,  Function.prototype);
+			       	 	
+			       		doh.t(f.hasOwnProperty("prototype"));
+			       		doh.is(typeof f.prototype,   "object");
+			       		doh.is(       f.prototype.constructor, f);
 			       		
-			       	   	//doh.is(Function.prototype,        f.__proto__);
-			       	 	//doh.is("function"        , typeof f.__proto__);
-			       	 	
-			       	    //doh.is("object",           typeof f.prototype);
-			       	 	//doh.is(f,                         f.prototype.constructor);
-			       	 	
-			       	 	
+			       		doh.f(f.hasOwnProperty("constructor"));
 			       	}
 				}
 			]);
@@ -113,6 +121,7 @@
 			       		doh.f(ob instanceof Function);
 
 			       		doh.is(typeof ob.__proto__, "object");
+			       		doh.is(       ob.__proto__, Object.prototype);
 			       		doh.t(        ob.__proto__.hasOwnProperty("constructor"));
 			       		doh.is(       ob.__proto__.constructor, Object);
 			       		
