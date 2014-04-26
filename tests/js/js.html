@@ -76,7 +76,8 @@
 			       		doh.is(       f.__proto__,  Function.prototype);
 			       	 	
 			       		doh.t(f.hasOwnProperty("prototype"));
-			       		doh.is(typeof f.prototype,   "object");
+			       		doh.is(typeof f.prototype,             "object");
+			       		doh.is(       f.prototype.__proto__,   Object.prototype);
 			       		doh.is(       f.prototype.constructor, f);
 			       		
 			       		doh.f(f.hasOwnProperty("constructor"));
@@ -101,7 +102,7 @@
 			       	    doh.is(       no.__proto__, f.prototype);
 			       	    doh.t(        no.__proto__.hasOwnProperty("constructor"));
 			       		doh.is(       no.__proto__.constructor, f);
-			       	    
+
 			       	    doh.f(no.hasOwnProperty("prototype"));
 			       	    
 			       		doh.f(no.hasOwnProperty("constructor"));
