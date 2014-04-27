@@ -20,13 +20,13 @@
 			        	doh.t(Object instanceof Function);
 			        	
 			        	doh.f(        Object.hasOwnProperty("__proto__"));  //hide property
-			        	doh.t(        Object.getPrototypeOf(Object));       //interesting
-			        	doh.is(       Object.getPrototypeOf(Object), Object.__proto__);  
+			        	doh.t(        Object.getPrototypeOf(Object));
 			        	doh.is(typeof Object.getPrototypeOf(Object), "function");
+			        	doh.is(       Object.getPrototypeOf(Object), Object.__proto__);  
 			        	doh.is(       Object.getPrototypeOf(Object), Function.prototype);
 			        	
 			        	doh.t(        Object.hasOwnProperty("prototype"));
-			        	doh.is(typeof Object.prototype,             "object");
+			        	doh.is(typeof Object.prototype,     "object");
 			        	doh.t(        Object.prototype.hasOwnProperty("__proto__"));
 			        	doh.is(       Object.prototype.__proto__,   null); //null & undefined
 			        	doh.f(        Object.prototype.hasOwnProperty("prototype"));
@@ -47,8 +47,8 @@
    	                	doh.t(Function instanceof Function);
    	                	doh.t(Function instanceof Object);
    	                	
-   	                	doh.f(        Function.hasOwnProperty("__proto__"));  //hide
-   	                	doh.t(        Object.getPrototypeOf(Function));       //interesting
+   	                	doh.f(        Function.hasOwnProperty("__proto__"));
+   	                	doh.t(        Object.getPrototypeOf(Function));
    	                	doh.is(typeof Function.__proto__, "function");
    	                	doh.is(       Function.__proto__, Function.prototype);
    	               	   	                	
@@ -87,6 +87,7 @@
 			       		doh.t(f.hasOwnProperty("prototype"));
 			       		doh.is(typeof f.prototype,             "object");
 			       		doh.is(       f.prototype.__proto__,   Object.prototype);
+			       		doh.f(f.prototype.hasOwnProperty("prototype"));
 			       		doh.is(       f.prototype.constructor, f);
 			       		
 			       		doh.f(f.hasOwnProperty("constructor"));
