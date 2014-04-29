@@ -35,6 +35,27 @@
 			        	
 			        	doh.f(Object.hasOwnProperty("constructor"));
 			        }
+			    },
+			    {
+			        name: "__proto__",   //__proto__ must be seted with javascript engine.
+			        runTest: function(t){
+			        	var noProto = Object.create(null);
+
+			        	doh.is(typeof noProto.__proto__,       "undefined");
+			        	doh.is(Object.getPrototypeOf(noProto), null);
+
+			        	noProto.__proto__ = 17;
+
+			        	doh.is(noProto.__proto__,  17);
+			        	doh.is(Object.getPrototypeOf(noProto), null);
+
+			        	var protoHidden = {};
+			        	Object.defineProperty(protoHidden, "__proto__",
+			        	                      { value: 42, writable: true, configurable: true, enumerable: true });
+
+			        	doh.is(protoHidden.__proto__,  42);
+			        	doh.is(Object.getPrototypeOf(protoHidden), Object.prototype);
+			        }
 			    }
 			]);		
 			
@@ -92,7 +113,42 @@
 			       		
 			       		doh.f(f.hasOwnProperty("constructor"));
 			       	}
-				}
+				},
+				{
+			  	    name: "Reset Prototype",
+			  	    runTest: function(t){
+			  	    	var f  = function(){},
+			  	    	obb = new f(),
+			  	    	oba,
+			  	    	fp;
+			  	    	
+			  	    	doh.is({},                          f.prototype);
+			  	    	
+			  	    	fp = f.prototype;
+			  	    	f.prototype = {a:"d"};           //reset prototype
+			  	    	oba = new f();
+			  	    	
+			  	    	doh.isNot(fp,                       f.prototype);
+			  	    	doh.is(Object.getPrototypeOf(obb),  fp);
+			  	    	doh.is(Object.getPrototypeOf(oba),  f.prototype);
+			  	    	
+			  	    }
+			    },
+				{
+			  	    name: "Modify Prototype",
+			  	    runTest: function(t){
+			  	    	var f  = function(){},
+			  	    	obb = new f(),
+			  	    	oba,
+			  	    	fp;
+
+			  	    	fp = f.prototype;
+			  	    	f.prototype.add = function(a,b){return a + b;};     //modify prototype
+			  	    	oba = new f();
+			  	    	
+			  	    	doh.is(fp,                         f.prototype);
+			  	    }
+			    }
 			]);
 			
 			doh.register("new object", [
@@ -146,7 +202,7 @@
 			       	}
 			    }
 			]);
-			
+
 			doh.run();
 		});
 	</script>
