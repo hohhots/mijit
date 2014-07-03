@@ -25,7 +25,7 @@
 			<sequential>
 				<exec executable = "bash" dir="../${dojoGitDir}/@{dir}">
 					<arg value = "-c" />
-					<arg value = "${gitXpull}" />
+					<arg value = "git fetch --all" />
 				</exec>
 			</sequential>
 		</for>
@@ -64,7 +64,7 @@
 				
 				<exec executable = "bash" dir="../@{dir}">
 					<arg value = "-c" />
-					<arg value = "git co `git tag | sort | tail -1` | grep '^HEAD$'" />
+					<arg value = "latestTag=$(git describe --tags `git rev-list --tags --max-count=1`);git checkout $latestTag" />
 				</exec>
 				
 			</sequential>
