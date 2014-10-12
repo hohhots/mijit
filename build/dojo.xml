@@ -62,11 +62,6 @@
 					<arg value = "git clone ${dojoGitDir}/@{dir}" />
 				</exec>
 				
-				<exec executable = "bash" dir="../@{dir}">
-					<arg value = "-c" />
-					<arg value = "latestTag=$(git describe --tags `git rev-list --tags --max-count=1`);git checkout $latestTag" />
-				</exec>
-				
 			</sequential>
 		</for>
 
