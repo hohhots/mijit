@@ -29,15 +29,15 @@
 		<echo>OK!</echo>
 	</target>
 
-	<target name="gitFetch">
+	<target name="gitPull">
 			<exec executable = "bash">
 				<arg value = "-c" />
-				<arg value = "git xfetch &amp;" />
+				<arg value = "git xpull &amp;" />
 		    </exec>
 	</target>
 	
 	<target name="IfRemoteHasNew">
-		<antcall target="gitFetch" /> 
+		<antcall target="gitPull" /> 
 		<echo>Check none fetched changes of remote repository.</echo>
 		<echo>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</echo>
 		<exec executable = "bash">
@@ -47,10 +47,10 @@
 		<echo>&lt;&lt;&lt;&lt;&lt;&lt;&lt; </echo>
 	</target>
 	
-	<target name="startEclipse" >
+	<target name="startEmacs" >
 		<exec executable = "bash">
 			<arg value = "-c" />
-			<arg value = "eclipse &amp;" />
+			<arg value = "emacs -fs &amp;" />
 		</exec>
 	</target>
 	
@@ -78,7 +78,7 @@
 		</condition>
 		<fail if="do.abort">Stopped by user.</fail>
 		 
-		<antcall target="startEclipse" /> 
+		<antcall target="startEmacs" /> 
 		<echo>Started!</echo>
 	</target>
 	
