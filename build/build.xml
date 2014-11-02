@@ -26,7 +26,7 @@
 			</sequential>
 		</for>
 		
-		<echo>OK!</echo>
+		<echo>OK!!</echo>
 	</target>
 
 	<target name="gitPull">
