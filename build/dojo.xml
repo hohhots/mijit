@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="UTF-8"?>
 <project>
 	 
 	<!-- all properties are in build.properties -->
@@ -20,10 +19,9 @@
 	</target>
 	
 	<target name="pullDojo">
-		<echo>Pull dojo from github</echo>
-		
 		<for list="${dojoSubDirs}" param="dir">
 			<sequential>
+			        <echo>Pull dojo from github/@{dir}</echo>
 				<exec executable = "bash" dir="../${dojoGitDir}/@{dir}">
 					<arg value = "-c" />
 					<arg value = "git pull" />
