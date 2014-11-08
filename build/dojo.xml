@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 	 
@@ -25,7 +26,8 @@
 			<sequential>
 				<exec executable = "bash" dir="../${dojoGitDir}/@{dir}">
 					<arg value = "-c" />
-					<arg value = "git fetch --all" />
+					<arg value = "git pull" />
+					<arg value = "git pull --tags" />
 				</exec>
 			</sequential>
 		</for>
