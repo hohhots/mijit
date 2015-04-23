@@ -1,16 +1,16 @@
 define([
-    "dojo/_base/declare",
-    "dojo/dom-construct",
-    "dijit/layout/ContentPane"
+	"dojo/_base/declare",
+	"dojo/dom-construct",
+	"dijit/layout/ContentPane"
 ], function( declare, domConstruct, dContentPane ){
 
 	// module:
-	//		mijit/layout/ContentPane
+	// mijit/layout/ContentPane
 
 	return declare("mijit.layout.ContentPane", dContentPane, {
-		postCreate: function(){
-            // create the DOM for this widget
-            
-        }
+	postCreate: function(){
+		// create the DOM for this widget
+		
+	}
 	});
 });
