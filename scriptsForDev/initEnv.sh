@@ -3,7 +3,7 @@ COMMANDS=( 'python' 'git' )
 COMMANDSPACKAGES=( 'python' 'git')
 comNum=${#COMMANDS[@]}
 for(( i=0;i<$comNum;i++)); do
-    echo "Checking if command \"${COMMANDS[${i}]}\" exists! I's package name is ${COMMANDSPACKAGES[${i}]}"
+    echo "Checking if command \"${COMMANDS[${i}]}\" exists! It's package name is ${COMMANDSPACKAGES[${i}]}"
     if [ -z `which ${COMMANDS[${i}]}` ]  #if com empty
     then
         echo "${COMMANDS[${i}]} doesn't exist!"
