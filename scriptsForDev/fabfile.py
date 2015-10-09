@@ -1,11 +1,14 @@
+from __future__ import with_statement
+from fabric.api import env, local, run, lcd
 import os
-# import fabrics API functions - self-explanatory once you see
-from fabric.api import env,local,run,cd
 
 env.hosts = ['pi@192.168.81.1:22']
 
+dojoGit = 'https://github.com/dojo/'
+cssSandPaperGit = 'https://github.com/zoltan-dulac/'
+
 dojoSubDirs = [ 'dojo','dojox','dijit','util','docs','demos' ]
-dojoGitDir = 'dojoGitRepository'
+cssSandPaperDir = 'cssSandPaper'
 
 
 def git():
@@ -15,25 +18,28 @@ def git():
 def pullDojo():
     print 'ok'
 
-def cloneDojo():
-    for dir in dojoSubDirs:
-        local('git clone https://github.com/dojo/' + dir + '.git ../../dojoGitDir/' + dir)
 
-def initDojo():
-    #clone dojo from github
-    if not os.path.exists(os.getcwd()+'/../../'+dojoGitDir):
-        cloneDojo()
-    pullDojo()
+def localPull(sdir, ddir):
+    a = '../../' + ddir
+    if not os.path.exists(a):
+        local('git clone ' + sdir + ddir + '.git ' + a)
+    else:
+        with lcd(a):
+            print 'Pull ' + ddir
+            local('git pull --all')
 
 def localDojoPull():
-    initDojo()
-    local('')
+    for dir in dojoSubDirs:
+        localPull(dojoGit, dir)
+
+def localCssSandPaperPull():
+    localPull(cssSandPaperGit, cssSandPaperDir)
 
 def setup():
     #prepare some third party code source from github
     localDojoPull()
     localCssSandPaperPull()
-    localEmacsPull()
+    localEmacsConfigPull()
 
     #setup some tools configurations
     localGitSetup()

@@ -1,6 +1,6 @@
 #!/bin/bash
-COMMANDS=( 'python' 'git' )
-COMMANDSPACKAGES=( 'python' 'git')
+COMMANDS=( 'python' 'fab' 'git' )
+COMMANDSPACKAGES=( 'python' 'fabric' 'git')
 comNum=${#COMMANDS[@]}
 for(( i=0;i<$comNum;i++)); do
     echo "Checking if command \"${COMMANDS[${i}]}\" exists! It's package name is ${COMMANDSPACKAGES[${i}]}"
