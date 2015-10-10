@@ -6,10 +6,10 @@ env.hosts = ['pi@192.168.81.1:22']
 
 dojoGit = 'https://github.com/dojo/'
 cssSandPaperGit = 'https://github.com/zoltan-dulac/'
+emacsConfigGit = 'https://github.com/purcell/emacs.d.git'
 
 dojoSubDirs = [ 'dojo','dojox','dijit','util','docs','demos' ]
 cssSandPaperDir = 'cssSandPaper'
-
 
 def git():
     local('git push') # runs the command on the local environment
@@ -35,15 +35,19 @@ def localDojoPull():
 def localCssSandPaperPull():
     localPull(cssSandPaperGit, cssSandPaperDir)
 
+def  localEmacsConfigPull():
+    localPull()
+
 def setup():
     #prepare some third party code source from github
     localDojoPull()
     localCssSandPaperPull()
     localEmacsConfigPull()
+    localMijitPull()
 
     #setup some tools configurations
-    localGitSetup()
-    localEmacsSetup()
+    localGitConfig()
+    localEmacsConfig()
 
 def done():
     #push to github from local
