@@ -4,6 +4,8 @@ import os
 
 env.hosts = ['pi@192.168.81.1:22']
 
+dependenceDir = '../../'
+
 dojoGit = 'https://github.com/dojo/'
 cssSandPaperGit = 'https://github.com/zoltan-dulac/'
 emacsConfigGit = 'https://github.com/purcell/'
@@ -12,16 +14,21 @@ dojoSubDirs = [ 'dojo','dojox','dijit','util','docs','demos' ]
 cssSandPaperDir = 'cssSandPaper'
 emacsConfigDir = 'emacs.d'
 
+gitAlias = [ 'user.name  brgd', 'user.email hohhots@gmail.com', 'push.default matching',
+             'branch.autosetuprebase always', 'core.editor \'emacs -fs\'', 'color.ui true',
+             'color.status auto', 'color.branch auto', 'alias.co checkout',
+             'alias.ci commit', 'alias.st status', 'alias.xfetch \'fetch origin\'',
+             'alias.xdiff \'diff origin master\'', 'alias.xmerge \'merge origin master\'',
+             'alias.xpull \'pull origin master\'', 'alias.xpush \'push origin master\'',
+             'alias.br branch', 'alias.type \'cat-file -t\'', 'alias.dump \'cat-file -p\'',
+             'alias.hist \'log --pretty=format:%h-%ad-|-%s%d-[%an] --graph --date=short\'' ]
+
 def git():
     local('git push') # runs the command on the local environment
     run('cd /home/pi/myProject/mijit; git pull') # runs the command on the remote environment
 
-def pullDojo():
-    print 'ok'
-
-
 def localPull(sdir, ddir):
-    a = '../../' + ddir
+    a = dependenceDir + ddir
     if not os.path.exists(a):
         local('git clone ' + sdir + ddir + '.git ' + a)
     else:
@@ -42,11 +49,22 @@ def  localEmacsConfigPull():
 def localMijitPull():
     local('git pull --all')
 
+def localGitConfig():
+    for alias in gitAlias:
+        local('git config --global ' + alias)
+
+def localEmacsConfig():
+    localEmacsConfigPull()
+    hd = os.path.expanduser("~") + '/.' + emacsConfigDir
+    if os.path.exists(hd):
+        print bcolors.FAIL + "FAIL : .emacs.d already exist in home directory!" + bcolors.ENDC
+    else:
+        local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd)
+
 def setup():
     #prepare some third party code source from github
     localDojoPull()
     localCssSandPaperPull()
-    localEmacsConfigPull()
     localMijitPull()
 
     #setup some tools configurations
@@ -59,3 +77,13 @@ def done():
 
     #pull from github in pi
     remotePull()
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
