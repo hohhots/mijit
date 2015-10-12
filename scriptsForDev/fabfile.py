@@ -1,5 +1,5 @@
 from __future__ import with_statement
-from fabric.api import env, local, run, lcd, cd
+from fabric.api import env, local, run, lcd, cd, sudo
 import os
 
 env.hosts = ['pi@192.168.81.1:22']
