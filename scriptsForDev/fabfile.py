@@ -1,5 +1,5 @@
 from __future__ import with_statement
-from fabric.api import env, local, run, lcd
+from fabric.api import env, local, run, lcd, cd
 import os
 
 env.hosts = ['pi@192.168.81.1:22']
@@ -23,9 +23,7 @@ gitAlias = [ 'user.name  brgd', 'user.email hohhots@gmail.com', 'push.default ma
              'alias.br branch', 'alias.type \'cat-file -t\'', 'alias.dump \'cat-file -p\'',
              'alias.hist \'log --pretty=format:%h-%ad-|-%s%d-[%an] --graph --date=short\'' ]
 
-def git():
-    local('git push') # runs the command on the local environment
-    run('cd /home/pi/myProject/mijit; git pull') # runs the command on the remote environment
+
 
 def localPull(sdir, ddir):
     a = dependenceDir + ddir
@@ -57,7 +55,7 @@ def localEmacsConfig():
     localEmacsConfigPull()
     hd = os.path.expanduser("~") + '/.' + emacsConfigDir
     if os.path.exists(hd):
-        print bcolors.FAIL + "FAIL : .emacs.d already exist in home directory!" + bcolors.ENDC
+        print bcolors.FAIL + "FAIL : Directory .emacs.d already exist in home directory!" + bcolors.ENDC
     else:
         local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd)
 
@@ -71,12 +69,21 @@ def setup():
     localGitConfig()
     localEmacsConfig()
 
+def localPush():
+    local('git push') # runs the command on the local environment
+
+def piPull():
+    with cd('/home/pi/myProject/mijit'):
+        run('git pull') # runs the command on the remote environment
+        run('scriptsForDev/iniPackages.sh')
+        run('cd scriptsForDev; fab setup')
+
 def done():
     #push to github from local
     localPush()
 
     #pull from github in pi
-    remotePull()
+    piPull()
 
 class bcolors:
     HEADER = '\033[95m'
