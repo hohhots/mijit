@@ -75,7 +75,7 @@ def localPush():
 def piPull():
     with cd('/home/pi/myProject/mijit'):
         run('git pull') # runs the command on the remote environment
-        run('scriptsForDev/iniPackages.sh')
+        run('scriptsForDev/initPackages.sh')
         run('cd scriptsForDev; fab setup')
 
 def done():
