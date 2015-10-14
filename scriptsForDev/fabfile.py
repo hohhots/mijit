@@ -31,7 +31,7 @@ def localPull(sdir, ddir):
         local('git clone ' + sdir + ddir + '.git ' + a)
     else:
         with lcd(a):
-            print 'Pull ' + ddir
+            print bcolors.OKGREEN + "Directory - " + a + bcolors.ENDC
             local('git pull --all')
 
 def localDojoPull():
@@ -55,9 +55,14 @@ def localEmacsConfig():
     localEmacsConfigPull()
     hd = os.path.expanduser("~") + '/.' + emacsConfigDir
     if os.path.exists(hd):
-        print bcolors.FAIL + "FAIL : Directory .emacs.d already exist in home directory!" + bcolors.ENDC
+        if os.path.exists(hd + '/.git'):
+            with lcd(hd):
+                print bcolors.OKGREEN + "Directory - " + hd + bcolors.ENDC
+                local('git pull') #update .emacs.d content
+        else:
+            print bcolors.FAIL + "WARNING : Directory .emacs.d already exist in home directory!\nPlease remove it first!" + bcolors.ENDC
     else:
-        local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd)
+        local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd) #copy .emacs.d to user direcroty
 
 def setup():
     #prepare some third party code source from github
