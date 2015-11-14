@@ -2,7 +2,7 @@ from __future__ import with_statement
 from fabric.api import env, local, run, lcd, cd, sudo
 import os
 
-env.hosts = ['pi@192.168.0.100:22']
+env.hosts = ['pi@192.168.1.100:22']
 
 dependenceDir = '../../'
 
