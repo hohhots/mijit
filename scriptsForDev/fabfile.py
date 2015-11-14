@@ -64,6 +64,10 @@ def localEmacsConfig():
     else:
         local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd) #copy .emacs.d to user direcroty
 
+def startHttpServer():
+    with lcd(dependenceDir):
+        local('python3 -m http.server &')
+
 def setup():
     #prepare some third party code source from github
     localDojoPull()
@@ -73,6 +77,9 @@ def setup():
     #setup some tools configurations
     localGitConfig()
     localEmacsConfig()
+
+    #start temp servers for develop
+    startHttpServer()
 
 def localPush():
     local('git push') # runs the command on the local environment
