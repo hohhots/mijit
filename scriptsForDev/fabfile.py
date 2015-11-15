@@ -1,6 +1,7 @@
 from __future__ import with_statement
 from fabric.api import env, local, run, lcd, cd, sudo
 import os
+from fabric.contrib.files import sed
 
 env.hosts = ['pi@192.168.1.100:22']
 
@@ -64,6 +65,11 @@ def localEmacsConfig():
     else:
         local('cp -r ' + dependenceDir + emacsConfigDir + ' ' + hd) #copy .emacs.d to user direcroty
 
+def setEmacsTheme():
+    hd = os.path.expanduser("~") + '/.' + emacsConfigDir
+    with lcd(hd):
+        local('sed -i "s/sanityinc-solarized-light/misterioso/g" custom.el')
+
 def startHttpServer():
     with lcd(dependenceDir):
         local('python3 -m http.server &')
@@ -77,6 +83,9 @@ def setup():
     #setup some tools configurations
     localGitConfig()
     localEmacsConfig()
+
+    #reset emacs theme with misterioso
+    setEmacsTheme()
 
     #start temp servers for develop
     startHttpServer()
