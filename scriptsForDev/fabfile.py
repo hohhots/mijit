@@ -67,8 +67,9 @@ def localEmacsConfig():
 
 def setEmacsTheme():
     hd = os.path.expanduser("~") + '/.' + emacsConfigDir
-    with lcd(hd):
-        local('sed -i "s/sanityinc-solarized-light/misterioso/g" custom.el')
+    if os.path.exists(hd):
+        with lcd(hd):
+            run('sed -i "s/sanityinc-solarized-light/misterioso/g" custom.el')
 
 def startHttpServer():
     with lcd(dependenceDir):
