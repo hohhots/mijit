@@ -75,11 +75,14 @@ def startHttpServer():
     with lcd(dependenceDir):
         local('python3 -m http.server &')
 
-def setup():
+def pull():
     #prepare some third party code source from github
     localDojoPull()
     localCssSandPaperPull()
     localMijitPull()
+
+def setup():
+    pull()
 
     #setup some tools configurations
     localGitConfig()
@@ -98,7 +101,7 @@ def piPull():
     with cd('/home/pi/myProject/mijit'):
         run('git pull') # runs the command on the remote environment
         sudo('scriptsForDev/initPackages.sh')
-        run('cd scriptsForDev; fab setup')
+        run('cd scriptsForDev; fab pull')
 
 def done():
     #push to github from local
