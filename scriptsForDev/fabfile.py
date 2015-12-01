@@ -13,6 +13,7 @@ emacsConfigGit = 'https://github.com/purcell/'
 
 dojoSubDirs = [ 'dojo','dojox','dijit','util','docs','demos' ]
 cssSandPaperDir = 'cssSandPaper'
+gitIgnoreGlobal = 'gitignoreGlobal'
 emacsConfigDir = 'emacs.d'
 
 gitAlias = [ 'user.name  brgd', 'user.email hohhots@gmail.com', 'push.default matching',
@@ -22,7 +23,8 @@ gitAlias = [ 'user.name  brgd', 'user.email hohhots@gmail.com', 'push.default ma
              'alias.xdiff \'diff origin master\'', 'alias.xmerge \'merge origin master\'',
              'alias.xpull \'pull origin master\'', 'alias.xpush \'push origin master\'',
              'alias.br branch', 'alias.type \'cat-file -t\'', 'alias.dump \'cat-file -p\'',
-             'alias.hist \'log --pretty=format:%h-%ad-|-%s%d-[%an] --graph --date=short\'' ]
+             'alias.hist \'log --pretty=format:%h-%ad-|-%s%d-[%an] --graph --date=short\'',
+             'core.excludesfile \'~/.' + gitIgnoreGlobal + '\'' ]
 
 
 
@@ -51,6 +53,11 @@ def localMijitPull():
 def localGitConfig():
     for alias in gitAlias:
         local('git config --global ' + alias)
+    hd = os.path.expanduser("~") + '/.' + gitIgnoreGlobal
+    if os.path.exists(hd):
+    	print bcolors.FAIL + "WARNING : File ." + gitIgnoreGlobal + " already exist in home directory!\nPlease remove it first!" + bcolors.ENDC
+    else:
+        local('cp -r ' + gitIgnoreGlobal + ' ' + hd) #copy gitignoreGlobal to user direcroty
 
 def localEmacsConfig():
     localEmacsConfigPull()

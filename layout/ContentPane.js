@@ -8,6 +8,9 @@ define([
 	// mijit/layout/ContentPane
 
 	return declare("mijit.layout.ContentPane", dContentPane, {
+		buildRendering: function(){
+			alert("ss");
+		},
 		postCreate: function(){
 			// create the DOM for this widget
 			
