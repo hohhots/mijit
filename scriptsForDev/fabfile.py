@@ -86,12 +86,13 @@ def pull():
     localMijitPull()
     
 def getLivejs():
+    a = dependenceDir + livejs
+    if os.path.exists(a):
+        local('rm ' + a) 	#delete existing live.js file
     with lcd(dependenceDir):
-        if os.path.exists(livejs):
-            local('rm ' + livejs) 	#delete existing live.js file
         local('wget http://livejs.com/' + livejs) #get live.js file
     
-    local('cat ' + dependenceDir + livejs + ' > ../' + mijitTestsDir + '/' + livejs)
+    local('cat ' + a + ' > ../' + mijitTestsDir + '/' + livejs)
     
 def setup():
     pull()
