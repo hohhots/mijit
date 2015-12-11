@@ -6,6 +6,7 @@ from fabric.contrib.files import sed
 env.hosts = ['pi@192.168.1.100:22']
 
 dependenceDir = '../../'
+mijitTestsDir = 'tests'
 
 dojoGit = 'https://github.com/dojo/'
 cssSandPaperGit = 'https://github.com/zoltan-dulac/'
@@ -15,6 +16,8 @@ dojoSubDirs = [ 'dojo','dojox','dijit','util','docs','demos' ]
 cssSandPaperDir = 'cssSandPaper'
 gitIgnoreGlobal = 'gitignoreGlobal'
 emacsConfigDir = 'emacs.d'
+
+livejs = 'live.js'
 
 gitAlias = [ 'user.name  brgd', 'user.email hohhots@gmail.com', 'push.default matching',
              'branch.autosetuprebase always', 'core.editor \'emacs -fs\'', 'color.ui true',
@@ -81,9 +84,19 @@ def pull():
     localDojoPull()
     localCssSandPaperPull()
     localMijitPull()
-
+    
+def getLivejs():
+    with lcd(dependenceDir):
+        if os.path.exists(livejs):
+            local('rm ' + livejs) 	#delete existing live.js file
+        local('wget http://livejs.com/' + livejs) #get live.js file
+    
+    local('cat ' + dependenceDir + livejs + ' > ../' + mijitTestsDir + '/' + livejs)
+    
 def setup():
     pull()
+    
+    getLivejs()
 
     #setup some tools configurations
     localGitConfig()
