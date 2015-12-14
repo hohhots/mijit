@@ -27,7 +27,7 @@
       pendingRequests = {},
       currentLinkElements = {},
       oldLinkElements = {},
-      interval = 1000,
+      interval = 2000,
       loaded = false,
       active = { "html": 1, "css": 1, "js": 1 };
 
@@ -168,7 +168,7 @@
         case "text/javascript":
         case "application/javascript":
         case "application/x-javascript":
-          document.location.reload();
+          window.top.document.location.reload();
       }
     },
 
