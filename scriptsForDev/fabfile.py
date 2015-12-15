@@ -94,6 +94,9 @@ def getLivejs():
     
     local('cat ' + a + ' > ../' + mijitTestsDir + '/' + livejs)
     
+    re = 'document.location.reload()'
+    local('sed -i \'s/' + re + '/window.top.' + re + '/g\' ../'  + mijitTestsDir + '/' + livejs)
+
 def setup():
     pull()
     
