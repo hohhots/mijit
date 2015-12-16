@@ -73,12 +73,15 @@
 							preventCache: true
 						}, dom.byId("pane2"));
 						domClass.add(pane2.parentDomNode,"parentDomNode");
+						pane2.set("content", "");
 					},
-					runTest: function(t){
+					runTest: function(t){ //node width equal to parent node width,node height is equal to parent's width
 						var pcs = domStyle.getComputedStyle(pane2.parentDomNode);
 						var cs = domStyle.getComputedStyle(pane2.domNode);
-						doh.is(pcs.width,cs.height);
-						doh.is(pcs.height,cs.width);
+						var pw = pcs.width, ph = pcs.height;
+						var w = cs.width, h = cs.height;
+						doh.is(pw.substring(0,pw.indexOf(".") + 2),h.substring(0,h.indexOf(".") + 2));
+						doh.is(ph.substring(0,ph.indexOf(".") + 2),w.substring(0,w.indexOf(".") + 2));
 					}
 				},
 				{

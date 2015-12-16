@@ -25,10 +25,24 @@ define([
 			domConstruct.place(this.domNode,this.parentDomNode,"only");
 			
 			//rotate domNode
-			//domStyle.set(this.domNode,"transform-origin","left top");
-			domStyle.set(this.domNode,"transform","rotateZ(-90deg)");
-			domStyle.set(this.domNode,"transform","rotate(180deg)");
+			domStyle.set(this.domNode,{
+				"box-sizing":"border-box",
+				"transform-origin":"left top",
+				"transform":"rotate(-90deg) rotateY(180deg)",
+			});			
 			
+			//reset width and height
+			var pcs = domStyle.getComputedStyle(this.parentDomNode);
+			domStyle.set(this.domNode,{
+				"width":pcs.height,
+				"height":pcs.width
+			});
+			
+			var cs = domStyle.getComputedStyle(this.domNode);
+			domStyle.set(this.parentDomNode,{
+				"width":cs.height,
+				"height":cs.width
+			});
 		}
 	});
 });
