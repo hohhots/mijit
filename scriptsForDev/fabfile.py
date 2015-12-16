@@ -94,8 +94,12 @@ def getLivejs():
     
     local('cat ' + a + ' > ../' + mijitTestsDir + '/' + livejs)
     
+    ls = ' ../'  + mijitTestsDir + '/' + livejs
     re = 'document.location.reload()'
-    local('sed -i \'s/' + re + '/window.top.' + re + '/g\' ../'  + mijitTestsDir + '/' + livejs)
+    local('sed -i \'s/' + re + '/window.top.' + re + '/g\''  + ls)
+    in1 = 'interval = 1000'
+    in2 = 'interval = 3000'
+    local('sed -i \'s/' + in1 + '/' + in2 + '/g\''  + ls)
 
 def setup():
     pull()

@@ -9,7 +9,7 @@ define([
 
 	return declare("mijit.layout.ContentPane", dContentPane, {
 		buildRendering: function(){
-			
+			this.inherited(arguments);
 		},
 		postCreate: function(){
 			// create the DOM for this widget
