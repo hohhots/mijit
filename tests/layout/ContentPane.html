@@ -67,7 +67,7 @@
 			
 			doh.registerGroup("pane2", [
 				{
-					name: "rotate_div",
+					name: "clear_content",
 					setUp: function(t){
 						pane2 = new ContentPane({
 							preventCache: true
@@ -76,20 +76,6 @@
 						pane2.set("content", "");
 					},
 					runTest: function(t){ //node width equal to parent node width,node height is equal to parent's width
-						var pcs = domStyle.getComputedStyle(pane2.parentDomNode);
-						var cs = domStyle.getComputedStyle(pane2.domNode);
-						var pw = pcs.width, ph = pcs.height;
-						var w = cs.width, h = cs.height;
-						doh.is(pw.substring(0,pw.indexOf(".") + 2),h.substring(0,h.indexOf(".") + 2));
-						doh.is(ph.substring(0,ph.indexOf(".") + 2),w.substring(0,w.indexOf(".") + 2));
-					}
-				},
-				{
-					name: "clear_content",
-					setUp: function(t){
-						pane2.set("content", "");// pass undefined on purpose
-					},
-					runTest: function(t){
 						doh.is(0, _WidgetBase.prototype.getChildren.call(pane2).length);
 						doh.is("", pane2.domNode.innerHTML)
 					}
@@ -104,7 +90,19 @@
 						pane2.set("content", msg);
 						doh.is(msg, pane2.domNode.innerHTML.toLowerCase());
 					}
+				},
+				{
+					name: "rotate_div",
+					runTest: function(t){ //node width equal to parent node width,node height is equal to parent's width
+						var pcs = domStyle.getComputedStyle(pane2.parentDomNode);
+						var cs = domStyle.getComputedStyle(pane2.domNode);
+						var pw = pcs.width, ph = pcs.height;
+						var w = cs.width, h = cs.height;
+						doh.is(pw.substring(0,pw.indexOf(".") + 2),h.substring(0,h.indexOf(".") + 2));
+						doh.is(ph.substring(0,ph.indexOf(".") + 2),w.substring(0,w.indexOf(".") + 2));
+					}
 				}
+
 			]);
 			
 			doh.run();

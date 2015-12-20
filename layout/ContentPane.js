@@ -8,11 +8,27 @@ define([
 
 	// module:
 	// mijit/layout/ContentPane
-
-	return declare("mijit.layout.ContentPane", dContentPane, {
+	
+	var ContentPaneParentContainer = declare("dijit.layout._ContentPaneParentContainer", [], {
+		
+	});
+	
+	var ContentPane = declare("mijit.layout.ContentPane", dContentPane, {
 		
 		//A reference to wrapping div of ContentPane
 		parentDomNode: null,
+		
+		width: null,
+		
+		height: null,
+		
+		_getwidhtValue: function(){
+			return this.height;
+		},
+		
+		_setwidhtValue: function(h){
+			this.height = h;
+		},
 		
 		buildRendering: function(){
 			this.inherited(arguments);
@@ -27,22 +43,25 @@ define([
 			//rotate domNode
 			domStyle.set(this.domNode,{
 				"box-sizing":"border-box",
-				"transform-origin":"left top",
-				"transform":"rotate(-90deg) rotateY(180deg)",
+				//"transform-origin":"left top",
+				//"transform":"rotate(-90deg) rotateY(180deg)",
 			});			
 			
 			//reset width and height
-			var pcs = domStyle.getComputedStyle(this.parentDomNode);
+			//var pcs = domStyle.getComputedStyle(this.parentDomNode);
 			domStyle.set(this.domNode,{
-				"width":pcs.height,
-				"height":pcs.width
+				"width":"100%",
+				"height":"100%"
 			});
 			
 			var cs = domStyle.getComputedStyle(this.domNode);
 			domStyle.set(this.parentDomNode,{
-				"width":cs.height,
-				"height":cs.width
+				//"width":cs.height,
+				//"width":"fit-content"
+				//"height":cs.width
 			});
 		}
 	});
+
+	return ContentPane;
 });
