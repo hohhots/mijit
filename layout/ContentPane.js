@@ -15,18 +15,15 @@ define([
 	
 	var ContentPane = declare("mijit.layout.ContentPane", dContentPane, {
 		
-		//A reference to wrapping div of ContentPane
-		parentDomNode: null,
-		
 		width: null,
 		
 		height: null,
 		
-		_getwidhtValue: function(){
+		_getWidhtValue: function(){
 			return this.height;
 		},
 		
-		_setwidhtValue: function(h){
+		_setWidhtValue: function(h){
 			this.height = h;
 		},
 		
@@ -42,7 +39,7 @@ define([
 			
 			//rotate domNode
 			domStyle.set(this.domNode,{
-				"box-sizing":"border-box",
+				//"box-sizing":"border-box",
 				//"transform-origin":"left top",
 				//"transform":"rotate(-90deg) rotateY(180deg)",
 			});			
@@ -62,6 +59,8 @@ define([
 			});
 		}
 	});
+	
+	ContentPane.parentContainer = ContentPaneParentContainer;
 
 	return ContentPane;
 });
