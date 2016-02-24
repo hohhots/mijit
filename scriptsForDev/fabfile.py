@@ -3,7 +3,7 @@ from fabric.api import env, local, run, lcd, cd, sudo
 import os
 from fabric.contrib.files import sed
 
-env.hosts = ['pi@192.168.1.100:22']
+env.hosts = ['pi@192.168.3.254:22']
 
 dependenceDir = '../../'
 mijitTestsDir = 'tests'
